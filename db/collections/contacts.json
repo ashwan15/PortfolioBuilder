@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "6393ecdfa7d042310c94f869"
+  },
+  "email": "1-email@email.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63948977dfb9ff0414e47878"
+  },
+  "email": "2-email@email.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394a26108e28b50e41f31eb"
+  },
+  "email": "3-email@email.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394a29f1840322c6090fa64"
+  },
+  "email": "4-email@email.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394a2de1840322c6090fa65"
+  },
+  "email": "5-dummyemail@email.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394a2f01840322c6090fa66"
+  },
+  "email": "6-dummyemail@email.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394a3471840322c6090fa67"
+  },
+  "email": "7-email@email.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6397b6a214156b633cd9b0c7"
+  },
+  "email": "7-dummyemail@email.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6398ff5c88d37f6438b0b439"
+  },
+  "email": "8-dummyemail@email.com",
+  "__v": 0
+}]
