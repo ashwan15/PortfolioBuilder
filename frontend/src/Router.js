@@ -1,0 +1,40 @@
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+//import Layout from './components/layout'
+//import Home from './components/Home'
+//import Example from './components/Sidebar'
+import Layout from './pages/Layout'
+//import ImgOverlayExample from './components/Header'
+import 'bootstrap/dist/css/bootstrap.min.css'
+//import GroupExample from './components/Card'
+import Home from './pages/Home'
+import Aboutme from './pages/Aboutme'
+import AboutProjects from './pages/AboutProjects'
+import Projects from './pages/Projects'
+import Contact from './Contact'
+import CreateAboutMe from './pages/CreateAboutMe'
+import CreateProject from './pages/CreateProject'
+import DeleteProject from './pages/DeleteProject'
+import Register from './pages/Register'
+import Login from './pages/Login'
+
+export default function Router() {
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />}></Route>
+          <Route path="/aboutme" element={<Aboutme />}></Route>
+          <Route path="/aboutproject" element={<AboutProjects />}></Route>
+          <Route path="/projects" element={<Projects />}></Route>
+          <Route path="/createaboutme" element={<CreateAboutMe />}></Route>
+          <Route path="/createproject" element={<CreateProject />}></Route>
+          <Route path="/deleteproject" element={<DeleteProject />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+        </Route>
+      </Routes>
+    </>
+  )
+}
