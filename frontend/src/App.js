@@ -35,6 +35,7 @@ import Login from './pages/Login'**/
 </Routes>**/
 
 function App() {
+  console.log(process.env.REACT_APP_API_URL)
   return (
     <>
       <Router></Router>

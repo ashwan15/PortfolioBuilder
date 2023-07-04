@@ -18,14 +18,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function Profile() {
   const { isLoading, error, data, refetch } = useQuery('aboutme', () =>
-    axios('http://localhost:3001/api/v1/aboutme')
+    axios('http://localhost:4000/api/v1/aboutme')
   )
 
   //this function tells server that we want to perform delete operation
   //this is only the definition of the function
   const deleteProject = async (id) => {
     const response = await axios.delete(
-      `http://localhost:3001/api/v1/aboutme/${id}`
+      `http://localhost:4000/api/v1/aboutme/${id}`
     )
     return response.data._id
   }

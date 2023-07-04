@@ -16,7 +16,7 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 export default function Blog() {
   const { isLoading, error, data } = useQuery('aboutproject', () =>
-    axios('http://localhost:3001/api/v1/aboutprojects')
+    axios('http://localhost:4000/api/v1/aboutprojects')
   )
   if (error) return <h1>Error:{error.message},try again.</h1>
   if (isLoading) return <h1>Loading..</h1>

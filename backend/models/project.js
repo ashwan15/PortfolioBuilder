@@ -16,6 +16,10 @@ const projectSchema = new mongoose.Schema({
     trim: true,
     maxlength: [2000, "Description cannot be more than 2000 characters"],
   },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 // The collection will be named "project"

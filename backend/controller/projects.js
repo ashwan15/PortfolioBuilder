@@ -1,7 +1,30 @@
 //const collectionProjects = require("../models/project");
+//const fs = require("fs");
+import fs from "fs";
 
+export {
+  getProjects,
+  getProjectId,
+  createProjects,
+  updateProject,
+  deleteProject,
+};
 import collectionProjects from "../models/project.js";
+import multer from "multer";
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); // Save uploaded files to the 'uploads' directory
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); // Generate a unique file name
+  },
+});
+
+//const upload = multer({ storage: storage });
+const upload = multer({
+  dest: "uploads/",
+});
 /**
  *Get all entries  of  "projects"  from db.
  * Send all entries in the response with a status code of 200.
@@ -16,8 +39,13 @@ const getProjects = async (req, res) => {
     //const projects = await collectionProjects.find({}).timeout(300000);
     //const projects = await collectionProjects.find({}).timeout(30000);
     const projects = await collectionProjects.find({}).maxTimeMS(30000);
-
-    res.status(200).json({ projects });
+    const projectData = projects.map((project) => ({
+      id: project._id,
+      title: project.title,
+      description: project.description,
+      image: project.image,
+    }));
+    res.status(200).json({ projects: projectData });
     console.log(projects);
   } catch (err) {
     console.log(err);
@@ -60,15 +88,37 @@ const getProjectId = async (req, res) => {
  * @param {Object} res - The response object
  */
 
-const createProjects = (req, res) => {
-  collectionProjects
-    .create(req.body)
-    .then(() => {
-      res.status(201).json(req.body);
-    })
-    .catch((err) => {
-      res.status(500).json({ msg: err });
+const createProjects = async (req, res) => {
+  try {
+    upload.single("image")(req, res, async (err) => {
+      if (err instanceof multer.MulterError) {
+        return res.status(400).json({ message: err.message });
+      } else if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+
+      const { title, description } = req.body;
+      //const imageUrl = req.file.filename;
+      //  const imageUrl = `http://localhost:3001/uploads/${req.file.originalname}`;
+      const image = {
+        data: fs.readFileSync(req.file.path),
+        contentType: req.file.mimetype,
+      };
+      const project = new collectionProjects({ title, description, image });
+      await project.save();
+      // Read the image file from the file system and encode it as a base64 string
+      //const imageData = fs.readFileSync(req.file.path, { encoding: "base64" });
+
+      res.json({
+        _id: project._id,
+        title: project.title,
+        description: project.description,
+        image: project.image,
+      });
     });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 /**
@@ -81,7 +131,7 @@ const createProjects = (req, res) => {
  * @param {Object} res - The response object
  */
 
-const updateProject = (req, res) => {
+/**const updateProject = (req, res) => {
   const { id: projectId } = req.params;
   collectionProjects
     .findOneAndUpdate({ _id: projectId }, req.body, {
@@ -93,6 +143,28 @@ const updateProject = (req, res) => {
     .catch((err) => {
       return res.status(404).json({ msg: `No Email with id:${projectId}` });
     });
+};**/
+
+const updateProject = async (req, res) => {
+  try {
+    const projectId = req.params.id;
+    const updates = req.body;
+    const options = { new: true };
+
+    const result = await collectionProjects.findByIdAndUpdate(
+      projectId,
+      updates,
+      options
+    );
+
+    if (!result) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 /**
@@ -123,10 +195,10 @@ const deleteProject = async (req, res) => {
 //export default createProjects;
 
 //Exporting module
-export {
+/**export default {
   getProjects,
   getProjectId,
   updateProject,
-  createProjects,
+  createProject: upload.single("image"),
   deleteProject,
-};
+};**/

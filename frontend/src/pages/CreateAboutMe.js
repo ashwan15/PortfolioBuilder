@@ -19,7 +19,7 @@ function CreateAboutMe() {
   const addProjectMutation = useMutation(
     //newAboutme is object with  input values of form
     (newAboutme) =>
-      axios.post('http://localhost:3001/api/v1/aboutme', newAboutme),
+      axios.post('http://localhost:4000/api/v1/aboutme', newAboutme),
     {
       // onSuccess will be called if the mutation is successful
       onSuccess: () => {

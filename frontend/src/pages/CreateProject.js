@@ -18,7 +18,7 @@ function GroupExample() {
   // Define the mutation function using useMutation
   const addProjectMutation = useMutation(
     (newProject) =>
-      axios.post('http://localhost:3001/api/v1/projects', newProject),
+      axios.post('http://localhost:4000/api/v1/projects', newProject),
     {
       // onSuccess will be called if the mutation is successful
       onSuccess: () => {
@@ -33,16 +33,16 @@ function GroupExample() {
     event.preventDefault()
     //new FromData is a javascript class for storing form data.
     //event.target = which element is performing event or where the event is happening
-    const formData = new FormData(event.target)
-    //after storing  new form data in formData
-    //we then pass that data to the newProject object
-    const newProject = {
-      title: formData.get('title'),
-      description: formData.get('description'),
+    const formData = new FormData()
+    formData.append('title', event.target.title.value)
+    formData.append('description', event.target.description.value)
+    formData.append('image', event.target.image.files[0])
+    try {
+      await addProjectMutation.mutateAsync(formData)
+      console.log('Project added sucessfully')
+    } catch (error) {
+      console.error(error)
     }
-    //after storing form data
-    // Call the mutation function to add the new project
-    addProjectMutation.mutate(newProject)
   }
 
   return (
@@ -66,6 +66,14 @@ function GroupExample() {
             </Label>
             <Col sm={10}>
               <Input type="text" name="description" id="description" />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label size="lg" sm={2} htmlFor="image">
+              Project-Image:
+            </Label>
+            <Col sm={10}>
+              <Input type="file" name="image" id="image" />
             </Col>
           </FormGroup>
 
