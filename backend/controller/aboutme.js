@@ -1,6 +1,6 @@
 //creating Collection name Username
 //const collectionAboutMe = require("../models/Aboutme");
-import collectionAboutMe from "../models/aboutme.js";
+import collectionAboutMe from "../models/Aboutme.js";
 
 //const { options } = require("../routes/main");
 
