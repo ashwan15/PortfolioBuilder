@@ -1,14 +1,15 @@
 import './App.scss'
-import Router from './Router'
-/**import { Route, Routes } from 'react-router-dom'
-//import Layout from './components/layout'
-//import Home from './components/Home'
-//import Example from './components/Sidebar'
+//import Router from './Router'
+
+//import { Route, Routes } from 'react-router-dom'
 import Layout from './pages/Layout'
-//import ImgOverlayExample from './components/Header'
-import 'bootstrap/dist/css/bootstrap.min.css'
-//import GroupExample from './components/Card'
 import Home from './pages/Home'
+import Example from './components/Sidebar'
+//import Layout from './pages/Layout'
+import ImgOverlayExample from './components/Header'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import GroupExample from './components/Card'
+//import Home from './pages/Home'
 import Aboutme from './pages/Aboutme'
 import AboutProjects from './pages/AboutProjects'
 import Projects from './pages/Projects'
@@ -17,8 +18,7 @@ import CreateAboutMe from './pages/CreateAboutMe'
 import CreateProject from './pages/CreateProject'
 import DeleteProject from './pages/DeleteProject'
 import Register from './pages/Register'
-import Login from './pages/Login'**/
-
+import Login from './pages/Login'
 /**<Routes>
   <Route path="/" element={<Layout />}>
     <Route index element={<Home />}></Route>
@@ -38,7 +38,9 @@ function App() {
   console.log(process.env.REACT_APP_API_URL)
   return (
     <>
-      <Router></Router>
+      <Layout></Layout>
+      <h1>React App</h1>
+      <Home></Home>
     </>
   )
 }
